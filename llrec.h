@@ -84,6 +84,20 @@ Node* llfilter(Node* head, Comp pred)
     // Provide your implementation below
     //*********************************************
 
+    if (head==nullptr) { //empty list : base case
+        return head;
+    }
+
+    Node* temp = head->next;
+
+    if(pred(head->val)==true) { // if its ODD or filterable
+        delete head; // deallocate
+        return llfilter(temp, pred);
+    }
+    else { // if its EVEN and continuable
+        head->next = llfilter(temp,pred); //links next pointer to the next viable element it will skip oer any odd numbers and point directly at next even element in list
+        return head; // returns current node
+    }
 
 }
 
